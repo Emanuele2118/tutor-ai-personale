@@ -6,7 +6,7 @@ st.title("🎓 Tutor AI Personale")
 
 # Legge la chiave e rimuove eventuali a capo inseriti dal browser
 try:
-    raw_key = st.secrets["API_KEY"]
+    raw_key = st.secrets["GEMINI_API_KEY"]
     api_key = raw_key.replace("\n", "").replace("\r", "")
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel("gemini-1.5-flash")
