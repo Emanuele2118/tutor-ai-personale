@@ -4,9 +4,10 @@ import google.generativeai as genai
 st.set_page_config(page_title="Tutor AI", page_icon="🎓")
 st.title("🎓 Tutor AI Personale")
 
-# Legge la chiave dai secrets di Streamlit
+# Legge la chiave e rimuove eventuali a capo inseriti dal browser
 try:
-    api_key = st.secrets["API_KEY"]
+    raw_key = st.secrets["API_KEY"]
+    api_key = raw_key.replace("\n", "").replace("\r", "")
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel("gemini-1.5-flash")
     
@@ -28,4 +29,4 @@ try:
             st.session_state.messages.append({"role": "assistant", "content": response.text})
             
 except Exception as e:
-    st.error("Configurazione non trovata. Controlla i Secrets su Streamlit Cloud.")
+    st.error("Errore di configurazione. Controlla i Secrets su Streamlit.")
